@@ -1,0 +1,36 @@
+# One case per line: expected|command. "deny" means the guardrail must block (deny or ask).
+# "allow" means the command is everyday work and must pass without a prompt.
+# Commands are sent to the hook as text only. Nothing here is ever executed.
+deny|rm -rf ~
+deny|rm -fr /
+deny|rm -rf /*
+deny|rm -rf "$HOME"
+deny|rm -rf ~/.ssh
+deny|find ~ -delete
+deny|find / -type f -delete
+deny|git reset --hard HEAD~3
+deny|git push --force origin main
+deny|git push -f origin main
+deny|git clean -fdx
+deny|bash -c "rm -rf ~"
+deny|sh -c 'rm -fr $HOME'
+deny|sudo rm -rf /etc
+deny|mkfs.ext4 /dev/sda1
+deny|dd if=/dev/zero of=/dev/sda bs=1M
+deny|chmod -R 777 /
+allow|rm -rf /tmp/build-cache
+allow|W=/tmp/work; rm -rf $W
+allow|rm -rf ./dist
+allow|rm -rf node_modules
+allow|chmod +x scripts/deploy.sh
+allow|pkill -f "go run"
+allow|while true; do sleep 1; done
+allow|git reset --soft HEAD~1
+allow|git push origin feature/login
+allow|git clean -n
+allow|find . -name '*.go' -newer go.mod
+allow|go test ./... -run TestShutdown
+allow|docker compose down
+allow|git commit -m "remove rm -rf from the build script"
+allow|grep -rn "rm -rf" scripts/
+allow|cat ~/.bashrc

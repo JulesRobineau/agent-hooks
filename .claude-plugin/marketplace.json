@@ -1,0 +1,24 @@
+{
+  "name": "jrobineau",
+  "owner": {
+    "name": "Jules Robineau",
+    "url": "https://jrobineau.com"
+  },
+  "metadata": {
+    "description": "Skills and hooks for coding agents by Jules Robineau, freelance Go developer and DevSecOps engineer."
+  },
+  "plugins": [
+    {
+      "name": "agent-skills",
+      "source": "./",
+      "description": "Guardrail bench (score your hook against 33 commands, nothing executed) and a power-command deny hook with its own 31 tests.",
+      "version": "1.0.0",
+      "category": "security",
+      "keywords": [
+        "guardrail",
+        "hooks",
+        "security"
+      ]
+    }
+  ]
+}
