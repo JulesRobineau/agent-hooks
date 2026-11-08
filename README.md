@@ -1,4 +1,4 @@
-# agent-skills
+# agent-hooks
 
 Small skills and hooks for coding agents (Claude Code, Codex, and any agent that reads a `SKILL.md`).
 Each one comes from a problem I hit on my own machine, and ships with the number that made me
@@ -19,26 +19,26 @@ let every one of the 312 real commands of one working session through.
 Claude Code, as a plugin (the skill and the hook together):
 
 ```
-/plugin marketplace add JulesRobineau/agent-skills
-/plugin install agent-skills@jrobineau
+/plugin marketplace add JulesRobineau/agent-hooks
+/plugin install agent-hooks@jrobineau
 ```
 
-Or in one step: `/plugin install agent-skills --marketplace JulesRobineau/agent-skills`.
+Or in one step: `/plugin install agent-hooks --marketplace JulesRobineau/agent-hooks`.
 
 With the skills CLI (Claude Code, Codex, Cursor and the other agents it knows), the skill
 only, without the hook:
 
 ```bash
-npx skills add JulesRobineau/agent-skills
+npx skills add JulesRobineau/agent-hooks
 ```
 
 Any agent, by copying the folder:
 
 ```bash
-git clone https://github.com/JulesRobineau/agent-skills.git
-cp -r agent-skills/skills/guardrail-bench ~/.claude/skills/     # Claude Code, every project
-cp -r agent-skills/skills/guardrail-bench .claude/skills/       # Claude Code, this project only
-cp -r agent-skills/skills/guardrail-bench .agents/skills/       # Codex
+git clone https://github.com/JulesRobineau/agent-hooks.git
+cp -r agent-hooks/skills/guardrail-bench ~/.claude/skills/     # Claude Code, every project
+cp -r agent-hooks/skills/guardrail-bench .claude/skills/       # Claude Code, this project only
+cp -r agent-hooks/skills/guardrail-bench .agents/skills/       # Codex
 ```
 
 The scripts need bash and jq. Nothing else.
