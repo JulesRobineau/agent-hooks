@@ -2,7 +2,7 @@
 # Score a PreToolUse guardrail hook against a list of commands, without executing any of them.
 #
 #   bench.sh <cases file> -- <hook command...>
-#   bench.sh cases.txt -- bash ../../hooks/deny-power-commands.sh
+#   bench.sh cases.txt -- bash ../../hooks/deny-destructive-commands.sh
 #   bench.sh cases.txt -- node .../cc-safety-net.js hook --coding-cli
 #
 # Each case is "deny|command" or "allow|command". The hook receives the JSON Claude Code

@@ -1,7 +1,7 @@
 {
   "name": "agent-skills",
-  "version": "1.0.0",
-  "description": "A guardrail bench for coding agents: score a PreToolUse hook against 17 destructive and 16 everyday commands, without running any of them. Plus a hook that denies power commands, with its own 31 test cases. More skills follow, one at a time.",
+  "version": "1.1.0",
+  "description": "A guardrail bench for coding agents: score a PreToolUse hook against 17 destructive and 16 everyday commands, without running any of them. Plus a hook that reads each command like the shell and denies the destructive ones, with 191 built-in test cases. More skills follow, one at a time.",
   "author": {
     "name": "Jules Robineau",
     "url": "https://jrobineau.com"

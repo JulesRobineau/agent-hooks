@@ -11,8 +11,8 @@
     {
       "name": "agent-skills",
       "source": "./",
-      "description": "Guardrail bench (score your hook against 33 commands, nothing executed) and a power-command deny hook with its own 31 tests.",
-      "version": "1.0.0",
+      "description": "Guardrail bench (score your hook against 33 commands, nothing executed) and a deny hook that reads commands like the shell, 17/17 and 16/16 on the bench, 191 built-in tests.",
+      "version": "1.1.0",
       "category": "security",
       "keywords": [
         "guardrail",

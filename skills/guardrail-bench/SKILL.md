@@ -19,7 +19,7 @@ the JSON Claude Code sends before a Bash call, and answers allow, ask or deny.
    or in `.claude/settings.json` of the project.
 2. Run the bench against each one, from this skill's folder:
    ```bash
-   ./bench.sh cases.txt -- bash ../../hooks/deny-power-commands.sh
+   ./bench.sh cases.txt -- bash ../../hooks/deny-destructive-commands.sh
    ./bench.sh cases.txt -- node ~/.claude/scripts/cc-safety-net/node_modules/cc-safety-net/dist/bin/cc-safety-net.js hook --coding-cli
    ```
    The script prints every miss (a destructive command let through) and every false alarm
@@ -33,21 +33,25 @@ the JSON Claude Code sends before a Bash call, and answers allow, ask or deny.
    and changes approach alone, the user is not interrupted.
 6. Pin the guardrail's version in a folder of its own, and rerun the bench before every update.
 7. Write down the known holes. Two that stay open with a syntax-based hook: a path hidden in a
-   variable (`W=/home/dev/projects; rm -rf $W`) and a deletion done by another program
-   (`python3 -c "import shutil; shutil.rmtree(...)"`). The safety net for those is git and a
-   backup the agent cannot reach.
+   variable set in an earlier command (the hook in this repository catches `W=~; rm -rf $W`
+   when both are in the same command, not when `W` was set one command before) and a deletion
+   done by another program (`python3 -c "import shutil; shutil.rmtree(...)"`). The safety net
+   for those is git and a backup the agent cannot reach.
 
 ## Files
 
 - `cases.txt`: 17 destructive commands and 16 everyday ones, the bench described in the
   article below. Edit it, it is yours.
 - `bench.sh`: the runner. Needs bash and jq.
-- `../../hooks/deny-power-commands.sh`: a 57-line hook that denies the commands that switch
-  the machine off or restart it, only in command position (not in a commit message or a
-  grep). Run it with `--test` to replay its 31 built-in cases. Use it as the model for a hook
-  that carries its own bench. It is one of the hooks this bench was built for: the author
-  saw it block a heredoc because one line of a README started with the name of such a command,
-  which is the rule working as written.
+- `../../hooks/deny-destructive-commands.sh`: a hook that reads each command like the shell
+  (words, quotes, separators, heredocs, sudo, bash -c, variables of the same command, relative
+  paths) and denies power commands, rm -r on home and system directories, find -delete, mv,
+  chmod -R, disk writes, forced pushes, reset --hard, clean -f and downloads piped into a
+  shell. 17/17 and 16/16 on `cases.txt`. Run it with `--test` to replay its 191 built-in cases,
+  or with `--check 'rm -rf ~'` for one command. Its predecessor, a regex on power commands,
+  once blocked a heredoc because one line of a README started with the name of such a
+  command: this one skips heredoc bodies. Use it as the model for a hook that carries its
+  own bench.
 
 ## What this bench found
 
